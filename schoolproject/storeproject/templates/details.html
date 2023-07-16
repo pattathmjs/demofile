@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        var deptObject = {
+            "Bio-science": ["Microbiology", "Biochemistry", "Molecular biology"],
+            "commerce": ["BCom", "BA LLB"],
+            "computer science":["programming languages","AI","computer network"],
+            "Humanities":["BA sociology","BA psychology"],
+            "Electronics":["Linear circuits","introduction to electronics"]
+        }
+        window.onload = function () {
+            var DepartmentSel = document.getElementById("Department");
+            var coursesSel = document.getElementById("Courses");
+
+            for (var x in deptObject) {
+                DepartmentSel.options[DepartmentSel.options.length] = new Option(x, x);
+            }
+            DepartmentSel.onchange = function() {
+                //empty Chapters- and Topics- dropdown
+
+                coursesSel.length = 1;
+                //display correct values
+                var y = deptObject[DepartmentSel.value] || [];
+                for (var i = 0; i < y.length; i++) {
+                    coursesSel.options[coursesSel.options.length] = new Option(y[i], y[i]);
+                }
+            }
+
+        }
+
+    </script>
+</head>
+
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="enter username"><br>
+        <input type="date" name="date" placeholder="enter date of birth"><br>
+        <input type="number" name="age" placeholder="enter age"><br>
+        <label>Gender</label><br>
+        <input type="radio">
+        <label>Male</label>
+        <input type="radio">
+        <label>Female</label><br>
+        <input type="number" name="phonenumber" placeholder="enter phone number"><br>
+        <input type="email" name="email" placeholder="enter email"><br>
+        <input type="text" name="address" placeholder="enter address"><br>
+
+        <label>Department</label>
+        <select name="Department" id="Department">
+            <option>Choose...</option>
+
+        </select><br>
+        <label>Courses</label>
+        <select name="Courses" id="Courses">
+            <option>please select department</option>
+
+        </select><br>
+
+        <label>Purpose</label>
+        <select>
+            <option>Choose..</option>
+            <option>Enquiry</option>
+            <option>Help</option>
+        </select><br>
+        <label>Materials Provides: </label>
+        <input type="checkbox">
+        <label>Book</label>
+        <input type="checkbox">
+        <label>Pen</label>
+        <input type="checkbox">
+        <label>Pencil</label><br>
+        <button><a href="end">Submit</a></button>
+        <button>logout</button>
+
+    </form>
+
+</body>
+
+</html>
